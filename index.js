@@ -17,5 +17,11 @@ mongoose
 const app = express();
 
 app.use("/api/feedback", Feedback);
-app.use(express()).get("/api", (req, res) => res.send("API"));
+
+app.use(express());
+
+app.get("/api", (req, res) => res.send("API"));
+
 app.set("view engine", "ejs").get("/", (req, res) => res.render("pages/index"));
+
+app.listen(PORT, () => console.log(`Ended up listening on ${PORT}`));

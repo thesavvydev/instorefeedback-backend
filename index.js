@@ -1,6 +1,8 @@
 const express = require("express");
 const PORT = process.env.PORT || 5000;
 const Feedback = require("./endpoints/Feedback");
+const FeedbackModel = require("./models/Feedback");
+var dayjs = require("dayjs");
 
 require("dotenv").config();
 
@@ -26,6 +28,35 @@ app.use(express());
 
 app.get("/api", (req, res) => res.send("API"));
 
-app.set("view engine", "ejs").get("/", (req, res) => res.render("pages/index"));
+app.set("view engine", "ejs").get("/", (req, res) => {
+  FeedbackModel.find().then((results) => {
+    const chartDates = results.map((item) =>
+      dayjs(item.date).format("MM/DD/YYYY")
+    );
+
+    const chartLabels = [...new Set(chartDates)];
+    const chartData = chartLabels
+      .sort((a, b) => new Date(a) - new Date(b))
+      .map((date) => {
+        return results.filter(
+          (item) => dayjs(item.date).format("MM/DD/YYYY") === date
+        ).length;
+      });
+
+    res.render("pages/index", {
+      items: results.map((item) => {
+        return {
+          store: item.store,
+          date: dayjs(item.date).format("MM/DD/YYYY"),
+          rating: item.rating,
+          clean: item.clean === "thumbs-up" ? "Yes" : "No",
+          greeted: item.greeted === "thumbs-up" ? "Yes" : "No",
+        };
+      }),
+      chartLabels,
+      chartData,
+    });
+  });
+});
 
 app.listen(PORT, () => console.log(`Ended up listening on ${PORT}`));

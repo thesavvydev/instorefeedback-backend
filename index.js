@@ -7,7 +7,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 mongoose
   .connect(
-    `mongodb+srv://thesavvydev:${process.env.DB_PASSWORD}@cluster0.a9zcg.mongodb.net/instorefeedback?retryWrites=true&w=majority`
+    `mongodb+srv://thesavvydev:${process.env.DB_PASSWORD}@cluster0.a9zcg.mongodb.net/instorefeedback?retryWrites=true&w=majority&ssl=true`
   )
   .then((result) => {
     app.listen(PORT, () => console.log(`Listening on ${PORT}`));

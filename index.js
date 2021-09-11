@@ -6,13 +6,14 @@ require("dotenv").config();
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(
-    `mongodb+srv://thesavvydev:${process.env.DB_PASSWORD}@cluster0.a9zcg.mongodb.net/instorefeedback?retryWrites=true&w=majority&ssl=true`
-  )
+  .connect(process.env.MONGO_PROD_URI)
   .then((result) => {
     console.log(`Database connected.`);
   })
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.log("MONOGO CONNECT ERROR");
+    console.log(err);
+  });
 
 const app = express();
 

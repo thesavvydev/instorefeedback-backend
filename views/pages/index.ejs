@@ -86,7 +86,8 @@
             yAxes: [
               {
                 ticks: {
-                  beginAtZero: false,
+                  beginAtZero: true,
+                  max: Math.max(...chartData) * 1.5,
                 },
               },
             ],

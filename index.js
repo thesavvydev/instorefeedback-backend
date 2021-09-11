@@ -6,6 +6,8 @@ var dayjs = require("dayjs");
 
 require("dotenv").config();
 
+const ratings = ["😡", "🙁", "😐", "😀", "😍"];
+
 const mongoose = require("mongoose");
 mongoose
   .connect(process.env.MONGO_PROD_URI, {
@@ -48,7 +50,7 @@ app.set("view engine", "ejs").get("/", (req, res) => {
         return {
           store: item.store,
           date: dayjs(item.date).format("MM/DD/YYYY"),
-          rating: item.rating,
+          rating: ratings[item.rating - 1],
           clean: item.clean === "thumbs-up" ? "Yes" : "No",
           greeted: item.greeted === "thumbs-up" ? "Yes" : "No",
         };

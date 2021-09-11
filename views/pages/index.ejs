@@ -9,7 +9,7 @@
 
     <div class="container-fluid">
       <div class="row">
-        <nav class="col-md-2 d-none d-md-block sidebar">
+        <!-- <nav class="col-md-2 d-none d-md-block sidebar">
           <br />
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
@@ -21,9 +21,9 @@
               </li>
             </ul>
           </div>
-        </nav>
+        </nav> -->
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
           <canvas
             class="my-4 w-100"
             id="myChart"
@@ -87,7 +87,7 @@
               {
                 ticks: {
                   beginAtZero: true,
-                  max: Math.max(...chartData) * 1.5,
+                  max: Math.max(...chartData) * 1.25,
                 },
               },
             ],

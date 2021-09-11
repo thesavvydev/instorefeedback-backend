@@ -10,7 +10,7 @@ mongoose
     `mongodb+srv://thesavvydev:${process.env.DB_PASSWORD}@cluster0.a9zcg.mongodb.net/instorefeedback?retryWrites=true&w=majority&ssl=true`
   )
   .then((result) => {
-    app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+    console.log(`Database connected.`);
   })
   .catch((err) => console.log(err));
 

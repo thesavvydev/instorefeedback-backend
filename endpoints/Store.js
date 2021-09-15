@@ -1,28 +1,26 @@
 const express = require("express");
 const router = express.Router();
-const Feedback = require("../models/Feedback");
+const Store = require("../models/Store");
 var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
 
 router.get("/", (req, res) => {
-  res.send("feedback api");
+  Store.find().then((results) => {
+    res.json(results);
+  });
 });
 
 router.post("/", jsonParser, (req, res) => {
-  const feedback = new Feedback({
+  const store = new Store({
     store: req.body.store,
-    store_title: req.body.store_title,
-    date: req.body.date,
-    rating: req.body.rating,
-    clean: req.body.clean,
-    greeted: req.body.greeted,
+    title: req.body.title,
   });
 
-  feedback
+  store
     .save()
     .then((result) => {
       res.send({
-        message: "Feedback recieved",
+        message: "Store created",
         data: result,
       });
     })

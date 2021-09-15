@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const feedbackSchema = new Schema({
-  store: Number,
+  store: String,
+  store_title: String,
   date: Date,
   rating: Number,
   clean: String,

@@ -16,6 +16,8 @@ router.post("/", jsonParser, (req, res) => {
     rating: req.body.rating,
     clean: req.body.clean,
     greeted: req.body.greeted,
+    mealExpectations: req.body.mealExpectations,
+    rateService: req.body.rateService,
   });
 
   feedback

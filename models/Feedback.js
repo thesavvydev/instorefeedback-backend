@@ -8,6 +8,8 @@ const feedbackSchema = new Schema({
   rating: Number,
   clean: String,
   greeted: String,
+  rateService: String,
+  mealExpectations: String,
 });
 
 module.exports = mongoose.model("Feedback", feedbackSchema);

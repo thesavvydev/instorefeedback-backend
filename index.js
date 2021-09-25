@@ -71,6 +71,8 @@ app.set("view engine", "ejs").get("/", async (req, res) => {
           rating: ratings[item.rating - 1],
           clean: item.clean === "thumbs-up" ? "Yes" : "No",
           greeted: item.greeted === "thumbs-up" ? "Yes" : "No",
+          rateService: item.rateService,
+          mealExpectations: item.mealExpectations,
         };
       }),
       chartLabels,

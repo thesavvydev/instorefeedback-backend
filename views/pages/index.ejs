@@ -53,15 +53,16 @@
               </tr>
             </thead>
             <tbody>
-              <% items.forEach((item,index)=>{%>
+              <% items.reverse().map(( { store, date, rating, clean, greeted,
+              mealExpectations, rateService }) => { %>
               <tr>
-                <td><%= item.store %></td>
-                <td><%= item.date %></td>
-                <td><%= item.rating %></td>
-                <td><%= item.clean %></td>
-                <td><%= item.greeted %></td>
-                <td><%= item.mealExpectations %></td>
-                <td><%= item.rateService %></td>
+                <td><%= store %></td>
+                <td><%= date %></td>
+                <td id="rating"><%= rating %></td>
+                <td id="clean"><%= clean %></td>
+                <td id="greeted"><%= greeted %></td>
+                <td id="mealExpectations"><%= mealExpectations %></td>
+                <td id="rateService"><%= rateService %></td>
               </tr>
               <% }) %>
             </tbody>

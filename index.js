@@ -42,7 +42,7 @@ app.set("view engine", "ejs").get("/", async (req, res) => {
 
     const chartLabels = [...new Set(chartDates)];
     const chartData = chartLabels
-      .sort((a, b) => new Date(a) - new Date(b))
+      .sort((a, b) => new Date(b) - new Date(a))
       .map((date) => {
         return results.filter(
           (item) => dayjs(item.date).format("MM/DD/YYYY") === date
@@ -64,17 +64,29 @@ app.set("view engine", "ejs").get("/", async (req, res) => {
       stats.average_rating = stats.average_rating.toFixed(2);
 
     res.render("pages/index", {
-      items: results.map((item) => {
-        return {
-          store: item.store_title,
-          date: dayjs(item.date).format("MM/DD/YYYY"),
-          rating: ratings[item.rating - 1],
-          clean: item.clean === "thumbs-up" ? "Yes" : "No",
-          greeted: item.greeted === "thumbs-up" ? "Yes" : "No",
-          rateService: item.rateService,
-          mealExpectations: item.mealExpectations,
-        };
-      }),
+      items: results
+        .sort((a, b) => new Date(b) - new Date(a))
+        .map(
+          ({
+            store_title,
+            date,
+            rating,
+            clean,
+            greeted,
+            rateService,
+            mealExpectations,
+          }) => {
+            return {
+              store: store_title,
+              date: dayjs(date).format("MM/DD/YYYY"),
+              rating: ratings[rating - 1],
+              clean: clean,
+              greeted: greeted,
+              rateService: rateService,
+              mealExpectations: mealExpectations,
+            };
+          }
+        ),
       chartLabels,
       chartData,
       stats,
